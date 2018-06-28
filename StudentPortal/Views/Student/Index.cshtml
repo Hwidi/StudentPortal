@@ -1,0 +1,63 @@
+﻿@model IEnumerable<Repositories.Models.Student>
+
+@{
+    ViewBag.Title = "Student Portal";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<p>
+    @if (User.Identity.IsAuthenticated)
+    {
+        <a href="javascript:void(0);" class="btn btn-primary btn-small addAnchor">Add Student</a>
+    }
+    else
+    {
+        @Html.Label("Login To Add Student", new { @class = "btn btn-primary btn-small", disabled = "disabled" })
+    }
+</p>
+
+<div id='myModal' class='modal'>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div id='myModalContent'></div>
+        </div>
+    </div>
+
+</div>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Gender)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Age)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modeltem => item.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Gender)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Age)
+        </td>
+        <td>
+            @if (User.Identity.IsAuthenticated)
+            {
+                <a href="javascript:void(0);" class="editAnchor" data-id="@item.Id">Edit</a>
+            }
+        </td>
+    </tr>
+}
+
+</table>
